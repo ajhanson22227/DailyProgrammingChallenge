@@ -4,6 +4,17 @@
 	For example, given [10, 15, 3, 7] and k of 17, return true since 10 + 7 is 17.
 */
 
+/*
+	My idea is to sort the array to be able to start search in the beginning and check the total of the j index which movesforward
+	if the total is greater than k, I can break and go to the next i index
+*/
+
+
+/*
+	PROBLEM WITH CODE. It occasionaly ?overflows? and the 12 in the array becomes a negative like -17947358 after the sort 
+
+	FIXED: I had quicksort(arr, 0, arr_length) instead of arr_length-1. Don't know how it didn't fail every time
+*/
 
 
 #include <iostream>
@@ -49,14 +60,16 @@ int main(){
 	int arr[] = {10, 7, 4, 9, 12, 2};
 
 	int arr_length = sizeof(arr) / sizeof(arr[0]);
-	quickSort(arr, 0, arr_length);
+	quickSort(arr, 0, arr_length-1);
 
 	for (int i = 0; i < arr_length; i++){
-		std::cout << arr[i] << "\n";
+		std::cout << arr[i] << " ";
 	}
+	std::cout << "\n";
 
 	bool flag_found = false;
 	int sum_to_find;
+	std::cout << "k = ";
 	std::cin >> sum_to_find;
 
 	for (int i = 0; i < arr_length-1; i++){
