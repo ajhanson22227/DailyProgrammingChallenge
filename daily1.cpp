@@ -47,24 +47,23 @@ int main(){
 		std::cout << arr[i] << "\n";
 	}
 
-	// bool flag_found = false;
-	// int sum_to_find;
-	// std::cin >> sum_to_find;
+	bool flag_found = false;
+	int sum_to_find;
+	std::cin >> sum_to_find;
 
-	// for (int i = 0; i < arr_length-1; i++){
-	// 	std::cout << "i is " << arr[i] << "\n";
-	// 	for (int j = i + 1; j < arr_length; j++){
-	// 		if (arr[i] + arr[j] == sum_to_find){
-	// 			flag_found = true;
-	// 		}
-	// 	}
-	// 	if (flag_found)
-	// 		break;
-	// }
-	// if (flag_found)
-	// 	std::cout << "There are two numbers that total " << sum_to_find << "\n";
-	// else
-	// 	std::cout << "There are NOT any numbers that total " << sum_to_find << "\n";
+	for (int i = 0; i < arr_length-1; i++){
+		for (int j = i + 1; j < arr_length; j++){
+			if (arr[i] + arr[j] == sum_to_find){
+				flag_found = true;
+			}
+		}
+		if (flag_found)
+			break;
+	}
+	if (flag_found)
+		std::cout << "There are two numbers that total " << sum_to_find << "\n";
+	else
+		std::cout << "There are NOT any numbers that total " << sum_to_find << "\n";
 
 	return 0;
 }
