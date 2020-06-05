@@ -26,7 +26,7 @@ int main(){
     assert (findDuplicate({1,2,2,3},3) == 2);
     assert (findDuplicate({1,2,3,3,4,5,6},6) == 3);
     assert (findDuplicate({1,2,3,4,5,1},5) == 1);
-    assert (findDuplicate({1,2,2},2) == 2); // should be the only fail
+    assert (findDuplicate({1,2,2},2) == 2);
 
 
     return 0;
