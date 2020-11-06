@@ -35,4 +35,5 @@ int main(){
     else{
         std::cout << k << " was not found in the list" << std::endl;
     }
+    return 0;
 }
