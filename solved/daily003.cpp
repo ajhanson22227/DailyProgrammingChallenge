@@ -13,13 +13,14 @@ class Node{
         Node(std::string val);
         Node(std::string val, Node*, Node*);
 
-        void details(int tabNum);
+        void details(int);
 
-        void insertLeft(Node *node){
+        void insertLeft(Node* node){
             left = node;
         }
 
         std::string serialize();
+        Node* deserialize(std::string, int &index);
 
         std::string value;
         Node* left;
@@ -28,7 +29,7 @@ class Node{
 };
 
 Node::Node(){
-    value = "root";
+    value = "";
     left = nullptr;
     right = nullptr;
 }
@@ -59,10 +60,33 @@ void Node::details(int tabNum){
 }
 
 std::string Node::serialize(){
-    if (this == nullptr) return "%/";
+    if (this == nullptr) return "!/";
     std::string serialString = "";
     serialString += this->value + "/" + this->left->serialize() + this->right->serialize();
     return serialString;
+}
+
+Node* Node::deserialize(std::string serializedString, int &index){
+    std::string val = "";
+    Node* tempNode = new Node();
+    for (int i = index; i < serializedString.size(); i++){
+        if (serializedString[i] == '!'){
+            index += 1;
+            return nullptr;
+        }
+        else if (serializedString[i] == '/'){
+            tempNode->value = val;
+            index = i + 1;
+            break;
+        }
+        else{
+            val += serializedString[i];
+        }
+    }
+    tempNode->left = this->deserialize(serializedString, index);
+    index+=1;
+    tempNode->right = this->deserialize(serializedString, index);
+    return tempNode;
 }
 
 
@@ -72,5 +96,8 @@ int main(){
     std::string rootSerialized = root->serialize();
     std::cout << rootSerialized << std::endl;
 
+    int ind = 0;
+    Node *newNode = root->deserialize(rootSerialized, ind);
+    newNode->details(0);
     return 0;
 }
